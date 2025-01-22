@@ -1,5 +1,5 @@
 from django.contrib import admin
-from task1.models import Buyer, Game
+from task1.models import Buyer, Game, News
 
 
 @admin.register(Buyer)
@@ -17,3 +17,6 @@ class GameAdmin(admin.ModelAdmin):
     list_display = ('title', 'cost',)
     search_fields = ('title',)
     list_per_page = 20
+    
+
+admin.site.register(News)

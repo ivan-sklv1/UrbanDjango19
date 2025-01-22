@@ -1,8 +1,9 @@
 import random
 from django.shortcuts import render
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 
-from task1.models import Buyer, Game
+from task1.models import Buyer, Game, News
 from task1.forms import UserRegisterForm
 
 
@@ -91,3 +92,15 @@ def cart_list(request):
         'title': title,
     }
     return render(request, 'fourth_task/cart.html', context)
+
+
+def news_list(request):
+    title = 'Новости'
+    context = {
+        'title': title,
+        'header': 'Новости',
+        'news': Paginator(
+            News.objects.all().order_by('-date'), 3).get_page(
+                request.GET.get('page', 1)),
+    }
+    return render(request, 'fourth_task/news.html', context)
